@@ -92,9 +92,9 @@ jobs:
 
       - name: Deploy
         run: |
-          gcloud run deploy helloworld \
+          gcloud run deploy qfirst \
           --region europe-west1 \
-          --image ${{ secrets.GCP_ARTIFACT_REGISTRY }}/helloworld \
+          --image ${{ secrets.GCP_ARTIFACT_REPOSITORY }}/qfirst:${{ steps.vars.outputs.short_sha }} \
           --platform managed \
           --allow-unauthenticated \
           --project ${{ secrets.GCP_PROJECT_ID }}
