@@ -3,8 +3,8 @@ name: Deploy to Cloud Run
 on:
   workflow_dispatch:
     inputs:
-      target-branch:
-        description: "Target branch for the workflow"
+      changesetId:
+        description: "changeset Id to tag the container image"
         required: true
   # push:
   #   branches:
@@ -70,8 +70,10 @@ jobs:
           docker build -t qtest/first:latest .
           docker tag qtest/first:latest ${{ secrets.GCP_ARTIFACT_REPOSITORY }}/qfirst:latest
           docker tag qtest/first:latest ${{ secrets.GCP_ARTIFACT_REPOSITORY }}/qfirst:${{ steps.vars.outputs.short_sha }}
+          docker tag qtest/first:latest ${{ secrets.GCP_ARTIFACT_REPOSITORY }}/qfirst:${{ inputs.changesetId }}
           docker push ${{ secrets.GCP_ARTIFACT_REPOSITORY }}/qfirst:latest
           docker push ${{ secrets.GCP_ARTIFACT_REPOSITORY }}/qfirst:${{ steps.vars.outputs.short_sha }}
+          docker push ${{ secrets.GCP_ARTIFACT_REPOSITORY }}/qfirst:${{ inputs.changesetId }}
 
 
       # - name: Build Docker image
@@ -94,7 +96,7 @@ jobs:
         run: |
           gcloud run deploy qfirst \
           --region europe-west1 \
-          --image ${{ secrets.GCP_ARTIFACT_REPOSITORY }}/qfirst:${{ steps.vars.outputs.short_sha }} \
+          --image ${{ secrets.GCP_ARTIFACT_REPOSITORY }}/qfirst:${{ inputs.changesetId }} \
           --platform managed \
           --allow-unauthenticated \
           --project ${{ secrets.GCP_PROJECT_ID }}
