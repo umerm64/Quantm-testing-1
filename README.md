@@ -41,5 +41,3 @@ changes start here:
 22
 23
 24
-25
-26
