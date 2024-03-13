@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       changesetId:
-        description: "changeset Id to tag the container image"
+        description: "tag (changeset) of the container image to be deployed"
         required: true
   # push:
   #   branches:
@@ -15,22 +15,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      # - name: Checkout repository
+      #   uses: actions/checkout@v3
 
-      - name: Set variables
-        id: vars
-        run: echo "short_sha=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+      # - name: Set variables
+      #   id: vars
+      #   run: echo "short_sha=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
-      - name: Checkout
-        uses: actions/checkout@master
+      # - name: Checkout
+      #   uses: actions/checkout@master
 
-      - name: Authenticate to GCP (Securely)
-        uses: google-github-actions/auth@v1
-        with:
-          # token_format: access_token
-          credentials_json: ${{ secrets.GCP_SA_KEY }}
-          project_id: ${{ secrets.GCP_PROJECT_ID }}  # Optional, but recommended for clarity
+      # - name: Authenticate to GCP (Securely)
+      #   uses: google-github-actions/auth@v1
+      #   with:
+      #     # token_format: access_token
+      #     credentials_json: ${{ secrets.GCP_SA_KEY }}
+      #     project_id: ${{ secrets.GCP_PROJECT_ID }}  # Optional, but recommended for clarity
 
       - name: Authenticate with GCP
         id: auth
@@ -65,15 +65,15 @@ jobs:
       #     username: ${{ secrets.DOCKER_USERNAME }}
       #     password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build & Push docker image for API
-        run: |
-          docker build -t qtest/first:latest .
-          docker tag qtest/first:latest ${{ secrets.GCP_ARTIFACT_REPOSITORY }}/qfirst:latest
-          docker tag qtest/first:latest ${{ secrets.GCP_ARTIFACT_REPOSITORY }}/qfirst:${{ steps.vars.outputs.short_sha }}
-          docker tag qtest/first:latest ${{ secrets.GCP_ARTIFACT_REPOSITORY }}/qfirst:${{ inputs.changesetId }}
-          docker push ${{ secrets.GCP_ARTIFACT_REPOSITORY }}/qfirst:latest
-          docker push ${{ secrets.GCP_ARTIFACT_REPOSITORY }}/qfirst:${{ steps.vars.outputs.short_sha }}
-          docker push ${{ secrets.GCP_ARTIFACT_REPOSITORY }}/qfirst:${{ inputs.changesetId }}
+      # - name: Build & Push docker image for API
+      #   run: |
+      #     docker build -t qtest/first:latest .
+      #     docker tag qtest/first:latest ${{ secrets.GCP_ARTIFACT_REPOSITORY }}/qfirst:latest
+      #     docker tag qtest/first:latest ${{ secrets.GCP_ARTIFACT_REPOSITORY }}/qfirst:${{ steps.vars.outputs.short_sha }}
+      #     docker tag qtest/first:latest ${{ secrets.GCP_ARTIFACT_REPOSITORY }}/qfirst:${{ inputs.changesetId }}
+      #     docker push ${{ secrets.GCP_ARTIFACT_REPOSITORY }}/qfirst:latest
+      #     docker push ${{ secrets.GCP_ARTIFACT_REPOSITORY }}/qfirst:${{ steps.vars.outputs.short_sha }}
+      #     docker push ${{ secrets.GCP_ARTIFACT_REPOSITORY }}/qfirst:${{ inputs.changesetId }}
 
 
       # - name: Build Docker image
