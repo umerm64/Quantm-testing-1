@@ -19,3 +19,16 @@ umerm64-patch-16
 test
 test
 test
+
+umerm64-patch-20
+umerm64-patch-21
+umerm64-patch-22
+umerm64-patch-23
+umerm64-patch-24
+umerm64-patch-25
+umerm64-patch-26
+umerm64-patch-27
+umerm64-patch-28
+umerm64-patch-29
+umerm64-patch-30
+umerm64-patch-31
