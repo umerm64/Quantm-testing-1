@@ -22,6 +22,9 @@ jobs:
         id: vars
         run: echo "short_sha=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
+      - name: print changeset id
+        run: echo changesetID ${{ inputs.changesetId }}
+
       - name: Checkout
         uses: actions/checkout@master
 
