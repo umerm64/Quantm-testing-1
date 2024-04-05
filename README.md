@@ -34,5 +34,5 @@ umerm64-patch-30
 umerm64-patch-31
 
 
-testing for stale branch detection.
+testing for stale branch detection...
 
