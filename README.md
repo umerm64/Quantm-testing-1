@@ -5,4 +5,4 @@ test commit for merge conflicts detection.
 testing for merge conflict detection.
 
 
-testing for merge conflicts detection...........0
+testing for merge conflicts detection...........01
