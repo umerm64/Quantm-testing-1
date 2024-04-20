@@ -3,8 +3,7 @@ Repo #1 for testing with quantm
 
 umerm64-patch-5
 
-hello
-world
+hello, world!
 
 testing for stale branch detection.
 
@@ -19,7 +18,7 @@ umerm64-patch-14
 umerm64-patch-15
 umerm64-patch-16
 
-test
+test.
 test
 test
 
